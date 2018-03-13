@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
 class User extends Authenticatable
 {
     /**
@@ -23,4 +24,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    /**
+     * Returning name of role
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role(){
+
+        return $this->belongsTo('App\Role');
+
+
+    }
+
 }
