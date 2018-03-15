@@ -35,9 +35,20 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function photo() {
 
         return $this->belongsTo('App\Photo');
     }
 
-}
+    /**
+     * Checking if user is an admin
+     * @return true or false
+     */
+    public function isAdmin() {
+
+       return $this->role->name == "administrator" ? true : false;
+    }
+  }
