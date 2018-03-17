@@ -2,6 +2,7 @@
 
 namespace App;
 
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
@@ -48,7 +49,6 @@ class User extends Authenticatable
      * @return true or false
      */
     public function isAdmin() {
-
-       return $this->role->name == "administrator" ? true : false;
+      return ($this->role->name == "administrator" && $this->is_active == '1') ? true : false;
     }
   }

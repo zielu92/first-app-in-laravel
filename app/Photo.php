@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
@@ -15,4 +16,10 @@ class Photo extends Model
     public function getFileAttribute($photo) {
         return $this->upload . $photo;
     }
+
+//    public function deletePhoto() {
+//
+//        Storage::delete($this->upload.$this->file);
+//        $this->delete();
+//    }
 }
