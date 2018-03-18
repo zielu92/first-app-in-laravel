@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Http\Requests\PostsCreateRequest;
-use App\Photo;
-use App\Post;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class AdminPostsController extends Controller
+class AdminCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,8 +18,9 @@ class AdminPostsController extends Controller
     public function index()
     {
         //
-        $posts = Post::all();
-        return view('admin.posts.index', compact('posts'));
+        $categories = Category::all();
+
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -34,9 +31,6 @@ class AdminPostsController extends Controller
     public function create()
     {
         //
-        $categories = Category::lists('name', 'id')->all();
-
-        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -45,23 +39,12 @@ class AdminPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostsCreateRequest $request)
+    public function store(Request $request)
     {
         //
+        Category::create($request->all());
 
-        $input = $request->all();
-        $photo = new Photo();
-        $user = Auth::user();
-
-        if($file = $request->file('photo_id')){
-           $input['photo_id'] = $photo->photoUpload($request->file('photo_id'), 'post_');
-        }
-
-        $user->post()->create($input);
-
-        Session::flash('returnMsg', 'The post has been created');
-
-        return redirect('admin/posts');
+        return redirect('/admin/categories');
     }
 
     /**
@@ -84,12 +67,9 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         //
+        $category = Category::findOrFail($id);
 
-        $categories = Category::lists('name', 'id')->all();
-
-        $post = Post::findOrFail($id);
-
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -102,20 +82,12 @@ class AdminPostsController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $input = $request->all();
-
-        $user = Auth::user();
-
-        if($file = $request->file('photo_id')){
-            $input['photo_id'] = $user->photo->photoUpload($request->file('photo_id'), 'post_');
-        }
-
-        $user->post()->whereId($id)->first()->update($input);
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
 
         Session::flash('returnMsg', 'The post has been updated');
 
-        return redirect('/admin/posts/');
-
+        return redirect('/admin/categories');
     }
 
     /**
@@ -127,14 +99,10 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         //
-        $post = Post::findOrFail($id);
+        Category::findOrFail($id)->delete();
 
-        if(!empty($post->photo->file)) unlink(public_path() . $post->photo->file);
+        Session::flash('returnMsg', 'The category has been deleted');
 
-        $post->delete();
-
-        Session::flash('returnMsg', 'The post has been deleted');
-
-        return redirect('/admin/posts');
+        return redirect('/admin/categories/');
     }
 }
