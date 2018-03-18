@@ -49,9 +49,15 @@ class User extends Authenticatable
      * @return true or false
      */
     public function isAdmin() {
-      return ($this->role->name == "administrator" && $this->is_active == '1') ? true : false;
+        if(!empty($this->role)) {
+            return ($this->role->name == "administrator" && $this->is_active == '1') ? true : false;
+        }
+        return false;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function post() {
 
         return $this->hasMany('App\Post');

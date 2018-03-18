@@ -50,6 +50,7 @@ class AdminUsersController extends Controller
     public function store(UserRequest $request)
     {
         //
+        $photo = new Photo();
 
         if(trim($request->password) == ''){
             $input = $request->except('password');
@@ -59,18 +60,9 @@ class AdminUsersController extends Controller
             $input['password'] = bcrypt($request->password);
         }
 
-        if($file = $request->file(['photo_id'])) {
-
-           $name = uniqid('user_') . $file->getClientOriginalName();
-
-           $file->move('images', $name);
-
-           $photo =  Photo::create(['file'=>$name]);
-
-           $input['photo_id'] = $photo->id;
+        if($file = $request->file('photo_id')){
+            $input['photo_id'] = $photo->photoUpload($request->file('photo_id'), 'user_');
         }
-
-
 
         User::create($input);
 
@@ -131,15 +123,8 @@ class AdminUsersController extends Controller
             $input['password'] = bcrypt($request->password);
         }
 
-        if($file = $request->file('photo_id')) {
-
-            $name = uniqid('user_') . $file->getClientOriginalName();
-
-            $file->move('images', $name);
-
-            $photo = Photo::create(['file'=>$name]);
-
-            $input['photo_id'] = $photo->id;
+        if($file = $request->file('photo_id')){
+            $input['photo_id'] = $user->photo->photoUpload($request->file('photo_id'), 'user_');
         }
 
         $user->update($input);

@@ -59,7 +59,7 @@
 
 
         {!! Form::close() !!}
-        </div>
+    </div>
 
 
 
