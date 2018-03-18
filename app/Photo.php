@@ -39,4 +39,11 @@ class Photo extends Model
             return $input['photo_id'];
 
     }
+
+    public function photoSource() {
+        $result = explode('/images/',$this->file);
+        $result = explode('_',$result[1]);
+        if(empty($result[0])) $result[0] = 'none';
+        return $result[0];
+    }
 }
