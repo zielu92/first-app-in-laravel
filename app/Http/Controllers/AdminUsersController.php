@@ -61,7 +61,7 @@ class AdminUsersController extends Controller
 
         if($file = $request->file(['photo_id'])) {
 
-           $name = time() . $file->getClientOriginalName();
+           $name = uniqid('user_') . $file->getClientOriginalName();
 
            $file->move('images', $name);
 
@@ -133,7 +133,7 @@ class AdminUsersController extends Controller
 
         if($file = $request->file('photo_id')) {
 
-            $name = time() . $file->getClientOriginalName();
+            $name = uniqid('user_') . $file->getClientOriginalName();
 
             $file->move('images', $name);
 
