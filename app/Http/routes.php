@@ -20,6 +20,7 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'AdminPostsController@post']);
 
 Route::group(['middleware'=>'admin'], function() {
 
@@ -36,5 +37,8 @@ Route::group(['middleware'=>'admin'], function() {
 
     Route::resource('admin/media', 'AdminMediasController');
 
+    Route::resource('admin/comments', 'PostCommentsController');
+
+    Route::resource('admin/comments/replies', 'CommentRepliesController');
 
 });

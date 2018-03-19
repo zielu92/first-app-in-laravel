@@ -11,16 +11,25 @@ class AdminMediasController extends Controller
 {
     //
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index() {
         $photos = Photo::all();
         return view('admin.media.index', compact('photos'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create() {
 
         return view('admin.media.create');
     }
 
+    /**
+     * @param Request $request
+     */
     public function store(Request $request){
 
         $photo = new Photo;
@@ -31,6 +40,10 @@ class AdminMediasController extends Controller
 
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function destroy($id) {
         $photo = Photo::findOrFail($id);
 

@@ -40,6 +40,10 @@ class Photo extends Model
 
     }
 
+    /**
+     * returning if the picture is used for user or for post or else
+     * @return string
+     */
     public function photoSource() {
         $result = explode('/images/',$this->file);
         $result = explode('_',$result[1]);
