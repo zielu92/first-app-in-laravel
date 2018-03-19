@@ -112,6 +112,7 @@ class AdminUsersController extends Controller
     {
         //
 
+        $photo = new Photo();
 
         $user = User::findOrFail($id);
 
@@ -124,7 +125,7 @@ class AdminUsersController extends Controller
         }
 
         if($file = $request->file('photo_id')){
-            $input['photo_id'] = $user->photo->photoUpload($request->file('photo_id'), 'user_');
+            $input['photo_id'] = $photo->photoUpload($request->file('photo_id'), 'user_');
         }
 
         $user->update($input);
