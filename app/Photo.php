@@ -25,6 +25,7 @@ class Photo extends Model
      * Uploading photo to server and update in DB
      * @param $file
      * @param $newName
+     * @return $photo_id
      */
     public function photoUpload($file, $newName){
 

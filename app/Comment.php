@@ -10,11 +10,17 @@ class Comment extends Model
 
     protected $fillable = ['post_id', 'author', 'email', 'body', 'is_active'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function replies() {
 
         return $this->hasMany('App\CommentReply');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function post() {
         return $this->belongsTo('App\Post');
     }
