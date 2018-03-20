@@ -21,7 +21,8 @@
                   <td>{{$comment->author}}</td>
                   <td>{{$comment->email}}</td>
                   <td>{{str_limit($comment->body, 10)}}</td>
-                  <td><a href="{{ route('home.post', $comment->post->id) }}"> {{$comment->post->title}} </a></td>
+                  <td><a href="{{ route('home.post', $comment->post->id) }}"> {{$comment->post->title}} </a><br>
+                  <a href="{{route('admin.comments.replies.show', $comment->id)}}">Check replies</a></td>
                   <td>
 
                           {!! Form::open(['method'=>'PATCH', 'action'=>['PostCommentsController@update',
