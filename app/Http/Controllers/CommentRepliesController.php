@@ -71,7 +71,7 @@ class CommentRepliesController extends Controller
     {
         //
         Return view('admin.comments.replies.show', [
-            'replies' => Comment::findOrFail($id)->replies
+            'replies' => CommentReply::where('comment_id', '=', $id)->paginate(10)
         ]);
     }
 

@@ -20,8 +20,9 @@ class PostCommentsController extends Controller
     {
         //
 
-        return view('admin.comments.index',
-            ['comments' => Comment::all()]);
+        return view('admin.comments.index', [
+            'comments' => Comment::paginate(10)
+            ]);
     }
 
     /**
