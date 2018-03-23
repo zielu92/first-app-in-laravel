@@ -20,7 +20,6 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index');
 
-
 Route::group(['middleware'=>'admin'], function() {
 
     Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'AdminPostsController@post']);
@@ -58,6 +57,12 @@ Route::group(['middleware'=>'admin'], function() {
         'store'=>'admin.media.store',
         'edit'=>'admin.media.edit'
     ]]);
+
+    Route::delete('admin/delete/media', 'AdminMediasController@deleteMedia');
+
+    Route::get('/admin/fm', function(){
+        return view('admin.media.filemanager');
+    });
 
     Route::resource('admin/comments', 'PostCommentsController', ['names'=>[
         'index'=>'admin.comments.index',
