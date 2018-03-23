@@ -11,6 +11,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(UsersTableSeeder::class);
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        factory(App\User::class, 10)->create()->each(function($user){
+            $user->post()->save(factory(App\Post::class)->make());
+        });
+
+        factory(App\Role::class, 3)->create();
+
+        factory(App\Category::class, 3)->create();
+
+        factory(App\Comment::class, 20)->create()->each(function ($c){
+
+            $c->replies()->save(factory(App\CommentReply::class)->make());
+
+        });
+
+
+
+       //  $this->call(UsersTableSeeder::class);
     }
 }

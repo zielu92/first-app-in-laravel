@@ -27,7 +27,7 @@
               'http://placehold.it/60?text=no image'}}"></td>
               <td><a href="{{route('admin.users.edit', $user->id)}}">{{$user->name}}</a></td>
               <td>{{$user->email}}</td>
-              <td>{{$user->role->name}}</td>
+              <td>{{$user->role ? $user->role->name : 'none'}}</td>
               <td>{{$user->is_active == 1 ? 'active' : 'not active'}}
               <td>{{$user->created_at->diffForHumans()}}</td>
               <td>{{$user->updated_at->diffForHumans()}}</td>
