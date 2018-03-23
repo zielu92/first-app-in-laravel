@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@include('includes.tinyeditor')
 
 @section('content')
 

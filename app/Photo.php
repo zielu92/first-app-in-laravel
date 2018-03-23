@@ -51,4 +51,8 @@ class Photo extends Model
         if(empty($result[0])) $result[0] = 'none';
         return $result[0];
     }
+
+    public function photoPlaceholder() {
+        return "http://placehold.it/500";
+    }
 }
