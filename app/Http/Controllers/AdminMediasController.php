@@ -25,7 +25,6 @@ class AdminMediasController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
-
         return view('admin.media.create');
     }
 
@@ -33,7 +32,6 @@ class AdminMediasController extends Controller
      * @param Request $request
      */
     public function store(Request $request){
-
         $photo = new Photo;
 
         if($file = $request->file('file')){
@@ -54,14 +52,17 @@ class AdminMediasController extends Controller
         $photo->delete();
     }
 
+    /**
+     * delete multiply and single records
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deleteMedia(Request $request) {
-
         if(isset($request->delete_single)) {
             $this->destroy($request->photo);
         }
 
         if(isset($request->delete_all) && !empty($request->checkBoxArray)) {
-
             $photos = Photo::findOrFail($request->checkBoxArray);
 
             foreach ($photos as $photo) {

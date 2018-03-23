@@ -90,7 +90,6 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        //
         $user = User::findOrFail($id);
 
         $roles = Role::pluck('name', 'id')->all();
@@ -109,8 +108,6 @@ class AdminUsersController extends Controller
      */
     public function update(UserEditRequest $request, $id)
     {
-        //
-
         $photo = new Photo();
 
         $user = User::findOrFail($id);
@@ -142,7 +139,6 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
        $user  = User::findOrFail($id);
 
        if(!empty($user->photo->file)) unlink(public_path() . $user->photo->file);

@@ -18,20 +18,9 @@ class AdminCategoriesController extends Controller
      */
     public function index()
     {
-        //
         return view('admin.categories.index', [
             'categories' => Category::all()
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -42,21 +31,9 @@ class AdminCategoriesController extends Controller
      */
     public function store(CategoriesRequest $request)
     {
-        //
         Category::create($request->all());
 
         return redirect('/admin/categories');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -67,7 +44,6 @@ class AdminCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
         $category = Category::findOrFail($id);
 
         return view('admin.categories.edit', compact('category'));
@@ -82,7 +58,6 @@ class AdminCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $category = Category::findOrFail($id);
         $category->update($request->all());
 
@@ -99,7 +74,6 @@ class AdminCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
         Category::findOrFail($id)->delete();
 
         Session::flash('returnMsg', 'The category has been deleted');

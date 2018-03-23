@@ -33,7 +33,6 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        //
         $categories = Category::pluck('name', 'id')->all();
 
         return view('admin.posts.create', compact('categories'));
@@ -47,8 +46,6 @@ class AdminPostsController extends Controller
      */
     public function store(PostsCreateRequest $request)
     {
-        //
-
         $input = $request->all();
         $photo = new Photo();
         $user = Auth::user();
@@ -72,7 +69,7 @@ class AdminPostsController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -83,8 +80,6 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        //
-
         $categories = Category::pluck('name', 'id')->all();
 
         $post = Post::findOrFail($id);
@@ -101,7 +96,6 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $input = $request->all();
 
         $user = Auth::user();
@@ -126,7 +120,6 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
         $post = Post::findOrFail($id);
 
         if(!empty($post->photo->file)) unlink(public_path() . $post->photo->file);
@@ -138,6 +131,10 @@ class AdminPostsController extends Controller
         return redirect('/admin/posts');
     }
 
+    /** Showing post
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function post($id) {
         $post = Post::findOrFail($id);
 

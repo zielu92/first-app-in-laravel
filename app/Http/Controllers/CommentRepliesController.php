@@ -11,15 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentRepliesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +19,7 @@ class CommentRepliesController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -39,11 +30,16 @@ class CommentRepliesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
-    public function createReply(Request $request) {
-
+    /**
+     * Creating reply controler
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function createReply(Request $request)
+    {
         $user = Auth::user();
 
         $data = [
@@ -69,7 +65,6 @@ class CommentRepliesController extends Controller
      */
     public function show($id)
     {
-        //
         Return view('admin.comments.replies.show', [
             'replies' => CommentReply::where('comment_id', '=', $id)->paginate(10)
         ]);
@@ -95,7 +90,6 @@ class CommentRepliesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         CommentReply::findOrFail($id)->update($request->all());
         return redirect()->back();
     }
@@ -108,7 +102,6 @@ class CommentRepliesController extends Controller
      */
     public function destroy($id)
     {
-        //
         CommentReply::findOrFail($id)->delete();
         return redirect()->back();
     }
