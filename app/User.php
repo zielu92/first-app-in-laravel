@@ -63,6 +63,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
+    /**
+     * Getting gravatar thumb image
+     * @return string
+     */
     public function getGravatarAttribute() {
 
         $hash = md5(strtolower(trim($this->attributes['email'])));

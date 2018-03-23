@@ -52,6 +52,10 @@ class Photo extends Model
         return $result[0];
     }
 
+    /**
+     * function giving example photo
+     * @return string
+     */
     public function photoPlaceholder() {
         return "http://placehold.it/500";
     }

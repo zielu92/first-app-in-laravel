@@ -72,7 +72,6 @@ Route::group(['middleware'=>'admin'], function() {
     ]]);
 
     Route::resource('admin/comments/replies', 'CommentRepliesController', ['names'=>[
-        'index'=>'admin.replies.index',
         'create'=>'admin.replies.create',
         'store'=>'admin.replies.store',
         'edit'=>'admin.replies.edit',
