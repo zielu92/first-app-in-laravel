@@ -30,15 +30,10 @@ class Photo extends Model
     public function photoUpload($file, $newName){
 
             $name = uniqid($newName) . $file->getClientOriginalName();
-
             $file->move('images', $name);
-
             $photo = Photo::create(['file'=>$name]);
 
-            $input['photo_id'] = $photo->id;
-
-            return $input['photo_id'];
-
+            return $photo->id;
     }
 
     /**
@@ -49,6 +44,7 @@ class Photo extends Model
         $result = explode('/images/',$this->file);
         $result = explode('_',$result[1]);
         if(empty($result[0])) $result[0] = 'none';
+
         return $result[0];
     }
 
